@@ -1,6 +1,11 @@
 > [!IMPORTANT]
 > No longer maintained.  If you wish to take over, send a mail to <sebastian@swsnr.de>.
 
+> [!NOTE]
+> This fork adds **sixel image support** and **BlackBox Terminal detection**.
+> VTE-based terminals (BlackBox, GNOME Terminal, etc.) that support sixel graphics
+> can now render inline images.  Build from source with `cargo build --release`.
+
 # mdcat
 
 Fancy `cat` for Markdown (that is, [CommonMark][]):

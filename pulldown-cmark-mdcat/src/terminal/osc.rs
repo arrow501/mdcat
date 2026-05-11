@@ -20,6 +20,7 @@ pub fn write_osc<W: Write + ?Sized>(writer: &mut W, command: &str) -> Result<()>
     Ok(())
 }
 
+#[allow(dead_code)]
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub struct Osc8Links;
 

@@ -50,6 +50,10 @@ pub enum TerminalProgram {
     ///
     /// See <https://mitchellh.com/ghostty> for more information.
     Ghostty,
+    /// BlackBox Terminal (VTE-based).
+    ///
+    /// VTE 0.72+ supports the kitty graphics protocol.
+    BlackBox,
 }
 
 impl Display for TerminalProgram {
@@ -63,6 +67,7 @@ impl Display for TerminalProgram {
             TerminalProgram::WezTerm => "WezTerm",
             TerminalProgram::VSCode => "vscode",
             TerminalProgram::Ghostty => "ghostty",
+            TerminalProgram::BlackBox => "blackbox",
         };
         write!(f, "{name}")
     }
@@ -95,6 +100,7 @@ impl TerminalProgram {
             Some("WezTerm") => Some(Self::WezTerm),
             Some("iTerm.app") => Some(Self::ITerm2),
             Some("ghostty") => Some(Self::Ghostty),
+            Some("BlackBox") => Some(Self::BlackBox),
             Some("vscode")
                 if get_term_program_major_minor_version()
                     .map_or(false, |version| (1, 80) <= version) =>
@@ -167,6 +173,8 @@ impl TerminalProgram {
             }
             TerminalProgram::Ghostty => ansi
                 .with_image_capability(ImageCapability::Kitty(self::kitty::KittyGraphicsProtocol)),
+            TerminalProgram::BlackBox => ansi
+                .with_image_capability(ImageCapability::Sixel(self::sixel::SixelProtocol)),
         }
     }
 }

@@ -10,6 +10,7 @@ use crate::resources::InlineImageProtocol;
 
 pub mod iterm2;
 pub mod kitty;
+pub mod sixel;
 pub mod terminology;
 
 /// The capability of basic styling.
@@ -35,6 +36,8 @@ pub enum ImageCapability {
     ITerm2(iterm2::ITerm2Protocol),
     /// The terminal understands the kitty graphics protocol.
     Kitty(kitty::KittyGraphicsProtocol),
+    /// The terminal understands the sixel image protocol.
+    Sixel(sixel::SixelProtocol),
 }
 
 impl ImageCapability {
@@ -43,6 +46,7 @@ impl ImageCapability {
             ImageCapability::Terminology(t) => t,
             ImageCapability::ITerm2(t) => t,
             ImageCapability::Kitty(t) => t,
+            ImageCapability::Sixel(t) => t,
         }
     }
 }
