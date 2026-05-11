@@ -138,3 +138,5 @@ All code is subject to the terms of the Mozilla Public License, v. 2.0, see [LIC
 
 Some files are subject to the terms of the Apache 2.0 license,
 see <http://www.apache.org/licenses/LICENSE-2.0>
+
+> This Source Code Form is "Incompatible With Secondary Licenses", as defined by the Mozilla Public License, v. 2.0.
