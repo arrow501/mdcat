@@ -1,0 +1,11 @@
+This repository is a fork of mdcat by Sebastian Wiesner <sebastian@swsnr.de>.
+Original project: https://github.com/swsnr/mdcat
+
+Modifications in this fork (sixel image protocol, runtime terminal capability
+detection) were authored by arrow.swiech@gmail.com with AI assistance.
+
+Sebastian Wiesner is not affiliated with this fork, its modifications, or the
+use of AI tools in their development.
+
+Original mdcat is licensed under the Mozilla Public License, v. 2.0.
+See LICENSE for details.

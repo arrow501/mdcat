@@ -1,4 +1,8 @@
 // Copyright Sebastian Wiesner <sebastian@swsnr.de>
+// Copyright arrow.swiech@gmail.com
+//
+// This file is part of a fork of mdcat and was not authored by Sebastian Wiesner.
+// Sebastian Wiesner is not affiliated with these modifications or their use of AI assistance.
 
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
