@@ -1,44 +1,46 @@
-> [!IMPORTANT]
-> No longer maintained upstream.  If you wish to take over, send a mail to <sebastian@swsnr.de>.
+# mdcat — arrow501 fork
 
-> [!NOTE]
-> **This is a fork** ([arrow501/mdcat](https://github.com/arrow501/mdcat)) that adds:
-> - **Sixel image protocol** — renders inline images in any sixel-capable terminal
-> - **Runtime capability detection** — probes the terminal at startup (kitty graphics first, then sixel via DA1) instead of relying solely on `$TERM`/`$TERM_PROGRAM`
->
-> Build from source: `cargo build --release`
+> Fancy `cat` for Markdown. Forked from [swsnr/mdcat] (archived) — see [NOTICE](./NOTICE).
 
-# mdcat
-
-Fancy `cat` for Markdown (that is, [CommonMark][]):
+[swsnr/mdcat]: https://github.com/swsnr/mdcat
 
 ```
 $ mdcat sample.md
 ```
 
-![mdcat showcase with different colour themes][sxs]
+## What this fork adds
 
-mdcat in [WezTerm], with "One Light (base16)", "Gruvbox Light", and "Darcula
-(base16)" (from left to right), and [JetBrains Mono] as font.
+- **Sixel image protocol** — inline images in any sixel-capable terminal (BlackBox, foot, mlterm, xterm, …)
+- **Runtime capability detection** — probes kitty graphics protocol first, then sixel via DA1; works automatically with no `$TERM` or `$TERM_PROGRAM` setup
+- **Nix flake** — `nix run github:arrow501/mdcat`
 
-[CommonMark]: http://commonmark.org
-[Solarized]: http://ethanschoonover.com/solarized
-[dracula]: https://draculatheme.com/iterm/
-[wezterm]: https://wezfurlong.org/wezterm/
-[JetBrains Mono]: https://www.jetbrains.com/lp/mono/
-[sxs]: ./screenshots/side-by-side.png
+## Install
+
+```bash
+# Cargo
+cargo install --git https://github.com/arrow501/mdcat
+
+# Nix
+nix run github:arrow501/mdcat
+
+# Build from source
+git clone https://github.com/arrow501/mdcat && cd mdcat && cargo build --release
+```
+
+---
 
 ## Features
 
-`mdcat` works best with [iTerm2], [WezTerm], [kitty], and any sixel-capable terminal, with a good font with italic characters.
+`mdcat` works best with [iTerm2], [WezTerm], [kitty], and any sixel-capable terminal, with a good terminal font with italic characters.
 Then it
 
 * nicely renders all basic CommonMark syntax,
 * highlights code blocks with [syntect],
-* shows [links][osc8], and also images inline in supported terminals (see above, where "Rust" is a clickable link!),
+* shows [links][osc8], and images inline — with the right protocol chosen automatically at runtime,
 * adds jump marks for headings in [iTerm2] (jump forwards and backwards with <key>⇧⌘↓</key> and <key>⇧⌘↑</key>).
 
-Image protocol is detected automatically at runtime by querying the terminal directly.
+[CommonMark]: http://commonmark.org
+[wezterm]: https://wezfurlong.org/wezterm/
 
 | Terminal                   |  Basic syntax | Syntax highlighting | Images | Jump marks |
 | :------------------------- | :-----------: | :-----------------: | :----: | :--------: |
@@ -86,20 +88,13 @@ This README is its own demo — run `mdcat README.md` and the image below render
 
 Try `mdcat --help` or read the [mdcat(1)](./mdcat.1.adoc) manpage.
 
-## Installation
-
-* [Release binaries](https://github.com/swsnr/mdcat/releases/) built on Github Actions.
-  - These binaries are build from Git source on Github actions; you find provenance attestations at <https://github.com/swsnr/mdcat/attestations>.
-* 3rd party packages at [Repology](https://repology.org/project/mdcat/versions)
-* You can also build `mdcat` manually with `cargo install mdcat` (see below for details).
-
 `mdcat` can be linked or copied to `mdless`; if invoked as `mdless` it automatically uses pagination.
 
 ## Building
 
 Run `cargo build --release`.
 
-Building requires `libcurl`.
+Building requires `libcurl` and `openssl`.
 
 ## Packaging
 
