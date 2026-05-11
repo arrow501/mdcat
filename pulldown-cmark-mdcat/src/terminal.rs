@@ -13,6 +13,7 @@ mod size;
 
 pub mod capabilities;
 mod detect;
+pub mod query;
 
 pub use self::detect::TerminalProgram;
 pub use self::size::TerminalSize;

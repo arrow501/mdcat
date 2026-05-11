@@ -12,7 +12,7 @@
 use clap::{CommandFactory, Parser};
 use clap_complete::generate;
 use mdcat::{create_resource_handler, process_file};
-use pulldown_cmark_mdcat::terminal::{TerminalProgram, TerminalSize};
+use pulldown_cmark_mdcat::terminal::{query, TerminalProgram, TerminalSize};
 use pulldown_cmark_mdcat::{Settings, Theme};
 use syntect::parsing::SyntaxSet;
 use tracing::{event, Level};
@@ -76,10 +76,19 @@ fn main() {
             terminal_size
         };
 
+        let mut terminal_capabilities = terminal.capabilities();
+        // Runtime query overrides env-var detection for the image protocol.
+        // Skip when paginating or forced to ANSI — those modes can't render images anyway.
+        if !args.paginate() && !args.ansi_only {
+            if let Some(img) = query::detect_image_capability() {
+                terminal_capabilities.image = Some(img);
+            }
+        }
+
         let exit_code = match Output::new(args.paginate()) {
             Ok(mut output) => {
                 let settings = Settings {
-                    terminal_capabilities: terminal.capabilities(),
+                    terminal_capabilities,
                     terminal_size,
                     syntax_set: &SyntaxSet::load_defaults_newlines(),
                     theme: Theme::default(),
