@@ -1,10 +1,12 @@
 > [!IMPORTANT]
-> No longer maintained.  If you wish to take over, send a mail to <sebastian@swsnr.de>.
+> No longer maintained upstream.  If you wish to take over, send a mail to <sebastian@swsnr.de>.
 
 > [!NOTE]
-> This fork adds **sixel image support** and **BlackBox Terminal detection**.
-> VTE-based terminals (BlackBox, GNOME Terminal, etc.) that support sixel graphics
-> can now render inline images.  Build from source with `cargo build --release`.
+> **This is a fork** ([arrow501/mdcat](https://github.com/arrow501/mdcat)) that adds:
+> - **Sixel image protocol** — renders inline images in any sixel-capable terminal
+> - **Runtime capability detection** — probes the terminal at startup (kitty graphics first, then sixel via DA1) instead of relying solely on `$TERM`/`$TERM_PROGRAM`
+>
+> Build from source: `cargo build --release`
 
 # mdcat
 
@@ -28,13 +30,15 @@ mdcat in [WezTerm], with "One Light (base16)", "Gruvbox Light", and "Darcula
 
 ## Features
 
-`mdcat` works best with [iTerm2], [WezTerm], and [kitty], and a good terminal font with italic characters.
+`mdcat` works best with [iTerm2], [WezTerm], [kitty], and any sixel-capable terminal, with a good font with italic characters.
 Then it
 
 * nicely renders all basic CommonMark syntax,
 * highlights code blocks with [syntect],
 * shows [links][osc8], and also images inline in supported terminals (see above, where "Rust" is a clickable link!),
 * adds jump marks for headings in [iTerm2] (jump forwards and backwards with <key>⇧⌘↓</key> and <key>⇧⌘↑</key>).
+
+Image protocol is detected automatically at runtime by querying the terminal directly.
 
 | Terminal                   |  Basic syntax | Syntax highlighting | Images | Jump marks |
 | :------------------------- | :-----------: | :-----------------: | :----: | :--------: |
@@ -46,11 +50,14 @@ Then it
 | [WezTerm]                  | ✓             | ✓                   | ✓²     |            |
 | [VSCode]                   | ✓             | ✓                   | ✓²     |            |
 | [Ghostty]                  | ✓             | ✓                   | ✓²     |            |
+| Sixel terminals³           | ✓             | ✓                   | ✓      |            |
 
 1) mdcat requires that the terminal supports strikethrough formatting and [inline links][osc8].
     This includes most modern terminal emulators, such as Windows Terminal, KDE Konsole, or anything based on VTE, GNOME's terminal emulation library.
     But mdcat likely won't work well on old terminals that lack these features (e.g. the Linux text console).
 2) SVG images are rendered with [resvg], see [SVG support].
+3) Any terminal that reports sixel support in its DA1 device attributes response — detected automatically at runtime.
+    Examples: [BlackBox], foot, mlterm, xterm (compiled with sixel support).
 
 Not supported:
 
@@ -67,6 +74,7 @@ Not supported:
 [SVG support]: https://github.com/RazrFalcon/resvg#svg-support
 [VSCode]: https://code.visualstudio.com/
 [Ghostty]: https://mitchellh.com/ghostty
+[BlackBox]: https://gitlab.gnome.org/raggesilver/blackbox
 
 ## Usage
 

@@ -8,6 +8,14 @@ Use `cargo release` to create a new release.
 
 ## [Unreleased]
 
+### Added (fork: arrow501/mdcat)
+- Sixel image protocol support via `color_quant` for 256-color quantization.
+- Runtime terminal capability detection: mdcat now probes the terminal at
+  startup using escape sequence queries (kitty graphics protocol first, then
+  DA1 device attributes for sixel) rather than relying solely on environment
+  variables. Any sixel-capable terminal is detected automatically.
+- BlackBox terminal detection via `$TERM_PROGRAM=BlackBox` as a static fallback.
+
 ## [2.7.1] – 2024-12-14
 
 ### Removed
