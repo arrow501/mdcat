@@ -131,12 +131,10 @@ Run `mdcat` with `$MDCAT_LOG=trace` for complete tracing information, or with `$
 
 ## License
 
-Copyright Sebastian Wiesner <sebastian@swsnr.de>
+Copyright Sebastian Wiesner <sebastian@swsnr.de> *(original author, not affiliated with this fork or its use of AI)*
+Copyright arrow.swiech@gmail.com *(fork modifications)*
 
-Binaries are subject to the terms of the Mozilla Public
-License, v. 2.0, see [LICENSE](LICENSE).
+All code is subject to the terms of the Mozilla Public License, v. 2.0, see [LICENSE](LICENSE).
 
-Most of the source is subject to the terms of the Mozilla Public
-License, v. 2.0, see [LICENSE](LICENSE), unless otherwise noted;
-some files are subject to the terms of the Apache 2.0 license,
+Some files are subject to the terms of the Apache 2.0 license,
 see <http://www.apache.org/licenses/LICENSE-2.0>
