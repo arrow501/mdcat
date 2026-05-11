@@ -76,6 +76,12 @@ Not supported:
 [Ghostty]: https://mitchellh.com/ghostty
 [BlackBox]: https://gitlab.gnome.org/raggesilver/blackbox
 
+## Sixel in action
+
+This README is its own demo — run `mdcat README.md` and the image below renders inline via sixel:
+
+![mdcat rendering markdown with syntax highlighting and inline images](./screenshots/side-by-side.png)
+
 ## Usage
 
 Try `mdcat --help` or read the [mdcat(1)](./mdcat.1.adoc) manpage.
